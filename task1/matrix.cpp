@@ -1,4 +1,3 @@
-@@ -1,48 +1,99 @@
 #include "matrix.hpp"
 #include <iostream>
 
@@ -126,4 +125,4 @@ void Matrix::CheckBounds(int row, int col) const {
         throw std::out_of_range("Index out of range");
     }
 }
-Footer
+
