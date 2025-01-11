@@ -19,18 +19,6 @@ bool CircularQueue::Push(int value) {
     return true;
 }
 
-bool CircularQueue::Pop()
-{
-    // your implementation here
-bool CircularQueue::Pop() {
-    if (IsEmpty()) {
-        return false;
-    }
-    head_index = (head_index + 1) % max_capacity;
-    current_size--;
-    return true;
-}
-
 bool CircularQueue::Pop() {
     if (IsEmpty()) {
     if (Empty()) {
@@ -55,7 +43,6 @@ int CircularQueue::Back() const {
         return -1;
     }
     return storage[(tail_index - 1 + max_capacity) % max_capacity];
-
 }
 
 bool CircularQueue::IsEmpty() const {
@@ -67,4 +54,3 @@ bool CircularQueue::IsFull() const {
 bool CircularQueue::Full() const {
     return current_size == max_capacity;
 }
-
