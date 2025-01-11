@@ -8,11 +8,9 @@ CircularQueue::CircularQueue(size_t max_size) : max_capacity(max_size), current_
     storage.resize(max_size);  // Pre-allocate exact size
 }
 
-bool CircularQueue::Push(int value)
-{
-    // your implementation here
 bool CircularQueue::Push(int value) {
     if (IsFull()) {
+    if (Full()) {
         return false;
     }
     storage[tail_index] = value;
@@ -21,11 +19,9 @@ bool CircularQueue::Push(int value) {
     return true;
 }
 
-bool CircularQueue::Pop()
-{
-    // your implementation here
 bool CircularQueue::Pop() {
     if (IsEmpty()) {
+    if (Empty()) {
         return false;
     }
     head_index = (head_index + 1) % max_capacity;
@@ -33,36 +29,29 @@ bool CircularQueue::Pop() {
     return true;
 }
 
-int CircularQueue::Front() const
-{
-    // your implementation here
 int CircularQueue::Front() const {
     if (IsEmpty()) {
+    if (Empty()) {
         return -1;
     }
     return storage[head_index];
 }
 
-int CircularQueue::Back() const
-{
-    // your implementation here
 int CircularQueue::Back() const {
     if (IsEmpty()) {
+    if (Empty()) {
         return -1;
     }
     return storage[(tail_index - 1 + max_capacity) % max_capacity];
 }
 
-bool CircularQueue::Empty() const
-{
-    // your implementation here
 bool CircularQueue::IsEmpty() const {
+bool CircularQueue::Empty() const {
     return current_size == 0;
 }
 
-bool CircularQueue::Full() const
-{
-    // your implementation here
 bool CircularQueue::IsFull() const {
+bool CircularQueue::Full() const {
     return current_size == max_capacity;
 }
+
