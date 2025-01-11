@@ -1,57 +1,68 @@
 #include "circular_queue.hpp"
-#include <vector>
+#include <stdexcept>
 
 CircularQueue::CircularQueue(size_t size)
 {
 	// your implementation here
-CircularQueue::CircularQueue(size_t max_size) : max_capacity(max_size), current_size(0), head_index(0), tail_index(0) {
-    storage.resize(max_size);  // Pre-allocate exact size
+CircularQueue::CircularQueue(size_t size) : capacity(size), front(0), rear(0), count(0) {
+    buffer = new int[size];
 }
 
+bool CircularQueue::Push(int value)
+{
+    // your implementation here
 bool CircularQueue::Push(int value) {
-    if (IsFull()) {
     if (Full()) {
         return false;
     }
-    storage[tail_index] = value;
-    tail_index = (tail_index + 1) % max_capacity;
-    current_size++;
+    buffer[rear] = value;
+    rear = (rear + 1) % capacity;
+    count++;
     return true;
 }
 
+bool CircularQueue::Pop()
+{
+    // your implementation here
 bool CircularQueue::Pop() {
-    if (IsEmpty()) {
     if (Empty()) {
         return false;
     }
-    head_index = (head_index + 1) % max_capacity;
-    current_size--;
+    front = (front + 1) % capacity;
+    count--;
     return true;
 }
 
+int CircularQueue::Front() const
+{
+    // your implementation here
 int CircularQueue::Front() const {
-    if (IsEmpty()) {
     if (Empty()) {
         return -1;
     }
-    return storage[head_index];
+    return buffer[front];
 }
 
+int CircularQueue::Back() const
+{
+    // your implementation here
 int CircularQueue::Back() const {
-    if (IsEmpty()) {
     if (Empty()) {
         return -1;
     }
-    return storage[(tail_index - 1 + max_capacity) % max_capacity];
+    return buffer[(rear - 1 + capacity) % capacity];
 }
 
-bool CircularQueue::IsEmpty() const {
+bool CircularQueue::Empty() const
+{
+    // your implementation here
 bool CircularQueue::Empty() const {
-    return current_size == 0;
+    return count == 0;
 }
 
-bool CircularQueue::IsFull() const {
+bool CircularQueue::Full() const
+{
+    // your implementation here
 bool CircularQueue::Full() const {
-    return current_size == max_capacity;
+    return count == capacity;
 }
-
