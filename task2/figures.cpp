@@ -68,3 +68,6 @@ std::unique_ptr<Figure> make_figure(FigureType type, double paramA, double param
             return nullptr;
     }
 }
+Footer
+
+
