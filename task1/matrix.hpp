@@ -5,11 +5,6 @@
 
 class Matrix {
 public:
-    Matrix(int rowCount = 0, int colCount = 0);
-    ~Matrix();
-    Matrix() : num_rows(0), num_cols(0) {}
-    explicit Matrix(int rows, int cols);
-
     Matrix(const Matrix& other) = default;
     Matrix& operator=(const Matrix& other) = default;
 
@@ -29,9 +24,7 @@ public:
     }
 
     void Reset(int rowCount, int colCount);
-    void Reset(int rows, int cols);
     int At(int row, int col) const;
-    int& At(int row, int col);
     const int& At(int row, int col) const;
 
     int GetRows() const;
