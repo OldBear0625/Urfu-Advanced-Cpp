@@ -3,8 +3,15 @@
 #include <vector>
 #include <stdexcept>
 
+class Matrix
+{
 class Matrix {
 public:
+    Matrix() = default;
+    Matrix(int numRows, int numCols);
+    Matrix() : num_rows(0), num_cols(0) {}
+    explicit Matrix(int rows, int cols);
+
     Matrix(const Matrix& other) = default;
     Matrix& operator=(const Matrix& other) = default;
 
@@ -23,26 +30,20 @@ public:
         return *this;
     }
 
-    void Reset(int rowCount, int colCount);
+    void Reset(int numRows, int numCols);
+    void Reset(int rows, int cols);
     int At(int row, int col) const;
+    int& At(int row, int col);
     const int& At(int row, int col) const;
-
     int GetRows() const;
     int GetCols() const;
-    bool operator==(const Matrix& otherMatrix) const;
-    bool operator!=(const Matrix& otherMatrix) const;
-    Matrix operator+(const Matrix& otherMatrix) const;
 
-private:
-    int m_rows;    // Количество строк
-    int m_cols;    // Количество столбцов
-    int** elements; // Динамический массив для хранения элементов матрицы
+    bool operator==(const Matrix& m2);
+    bool operator!=(const Matrix& m2);
+    Matrix operator+(const Matrix& m2);
     friend std::istream& operator>>(std::istream& in, Matrix& matrix);
     friend std::ostream& operator<<(std::ostream& out, const Matrix& matrix);
 
-    void AllocateMemory();
-    void DeallocateMemory();
-    void CheckBounds(int row, int col) const;
     friend bool operator==(const Matrix& lhs, const Matrix& rhs);
     friend bool operator!=(const Matrix& lhs, const Matrix& rhs);
 
